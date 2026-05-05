@@ -14,7 +14,7 @@ function Cadastro() {
 
 }
 
-function login() {
+function Login() {
     let usuario = document.getElementById("usuario").value;
     let senha = document.getElementById("senha").value;
 

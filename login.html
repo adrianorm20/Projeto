@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -12,15 +13,12 @@
         <button>
             <a href="index.html">Home</a>
         </button>
+        <label>Usuário:</label>
+        <input type="text" id="usuario">
+        <label>Senha:</label>
+        <input type="password" id="senha">
+        <button onclick="Login()">Logar</button>
     </div>
-
-
-    <label>Usuário:</label>
-    <input type="text" id="usuario">
-
-    <label>Senha:</label>
-    <input type="password" id="senha">
-    <button onclick="login()">Logar</button>
 
 
     <script src="script.js"></script>
