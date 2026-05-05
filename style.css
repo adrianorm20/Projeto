@@ -1,0 +1,51 @@
+/*  Toda parte do "Home" */
+body {
+    background: cyan;
+    flex-wrap: wrap;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2 {
+
+}
+
+a {
+    background: white;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
+    font-family: sans-serif;
+    transition: all .35s;
+}
+
+a:after {
+    background: #ff003b;
+    transition: all .35s;
+}
+
+a:hover {
+    color: #ff0000;
+}
+
+a:hover:after {
+    width: 100%;
+}
+
+
+
+/*  Parte do Cadastro e Login */
+
+.Home {
+  
+}
+
+.Home {
+   
+}
