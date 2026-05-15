@@ -2,382 +2,514 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investimentos</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investimentos</title>
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<nav class="sidebar">
-  <div class="logo">CA</div>
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="logo">CA</div>
 
-  <button class="nav-btn active" onclick="showPage('dashboard',this)" title="Dashboard">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-  </button>
-
-  <button class="nav-btn" onclick="showPage('alertas',this)" title="Alertas">
-    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-  </button>
-
-  <button class="nav-btn" onclick="showPage('negociacoes',this)" title="Negociações">
-    <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-  </button>
-
-  <button class="nav-btn" onclick="showPage('pagamento',this)" title="Pagamento">
-    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-  </button>
-
-  <div class="sidebar-bottom">
-    <button class="nav-btn" onclick="showPage('meusdados',this)" title="Meus Dados">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <button class="nav-btn active" onclick="showPage('dashboard',this)" title="Dashboard">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
     </button>
-  </div>
-</nav>
 
-<main>
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="topbar-left">
-      <span class="topbar-title" id="page-title">Dashboard</span>
-      <span class="topbar-sub" id="page-sub">Visão geral da carteira</span>
-    </div>
-    <div class="topbar-right">
-      <span class="badge-green">● Mercado aberto</span>
-      <div class="avatar">CA</div>
-    </div>
-  </div>
+    <button class="nav-btn" onclick="showPage('alertas',this)" title="Alertas">
+      <svg viewBox="0 0 24 24">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
+    </button>
 
-  <!-- ══════════ DASHBOARD ══════════ -->
-  <div class="page active" id="page-dashboard">
-    <div class="grid-4">
-      <div class="card">
-        <div class="card-label">Patrimônio Total</div>
-        <div class="card-value">R$ 42.830</div>
-        <div class="card-change up">▲ +2,4% hoje</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Lucro do Mês</div>
-        <div class="card-value">R$ 1.204</div>
-        <div class="card-change up">▲ +2,89%</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Posições Abertas</div>
-        <div class="card-value">6</div>
-        <div class="card-change" style="color:var(--muted)">4 países</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Cashback Acum.</div>
-        <div class="card-value">R$ 218</div>
-        <div class="card-change up">▲ +R$ 12 hoje</div>
-      </div>
-    </div>
+    <button class="nav-btn" onclick="showPage('negociacoes',this)" title="Negociações">
+      <svg viewBox="0 0 24 24">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    </button>
 
-    <div class="table-wrap">
-      <div class="table-head">
-        <h3>Ações em carteira</h3>
-        <span style="font-size:12px;color:var(--muted)">Atualizado agora</span>
-      </div>
-      <table>
-        <thead><tr>
-          <th>País</th><th>Ação</th><th>Variação</th><th>Preço</th><th>Qtd</th><th>Total</th><th>Status</th><th>Ação</th>
-        </tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="flag" style="background:#009c3b">🇧🇷</span>Brasil</td>
-            <td><b>PETR4</b></td><td class="up">+1,59%</td>
-            <td class="mono" style="font-family:var(--mono)">R$ 38,42</td>
-            <td>100</td><td class="mono" style="font-family:var(--mono)">R$ 3.842</td>
-            <td><span class="tag tag-green">Queimados</span></td>
-            <td><button class="btn-sm btn-sell" onclick="openSell('PETR4','R$ 38,42')">Vender</button></td>
-          </tr>
-          <tr>
-            <td><span class="flag" style="background:#ff9933">🇮🇳</span>Índia</td>
-            <td><b>INFY</b></td><td class="down">−0,48%</td>
-            <td style="font-family:var(--mono)">₹ 1.420</td>
-            <td>50</td><td style="font-family:var(--mono)">₹ 71.000</td>
-            <td><span class="tag tag-red">Poluição</span></td>
-            <td><button class="btn-sm btn-buy" onclick="openBuy('INFY','₹ 1.420')">Comprar</button></td>
-          </tr>
-          <tr>
-            <td>🇺🇸 EUA</td>
-            <td><b>AAPL</b></td><td class="up">+0,92%</td>
-            <td style="font-family:var(--mono)">$ 189,30</td>
-            <td>10</td><td style="font-family:var(--mono)">$ 1.893</td>
-            <td><span class="tag tag-blue">Estável</span></td>
-            <td><button class="btn-sm btn-sell" onclick="openSell('AAPL','$ 189,30')">Vender</button></td>
-          </tr>
-          <tr>
-            <td>🇩🇪 Alemanha</td>
-            <td><b>SAP</b></td><td class="up">+2,10%</td>
-            <td style="font-family:var(--mono)">€ 172,50</td>
-            <td>20</td><td style="font-family:var(--mono)">€ 3.450</td>
-            <td><span class="tag tag-green">Alta</span></td>
-            <td><button class="btn-sm btn-buy" onclick="openBuy('SAP','€ 172,50')">Comprar</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+    <button class="nav-btn" onclick="showPage('pagamento',this)" title="Pagamento">
+      <svg viewBox="0 0 24 24">
+        <rect x="1" y="4" width="22" height="16" rx="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+      </svg>
+    </button>
 
-  <!-- ══════════ ALERTAS ══════════ -->
-  <div class="page" id="page-alertas">
-    <div class="grid-2" style="margin-bottom:1.5rem">
-      <div class="card">
-        <div class="card-label">Alertas Ativos</div>
-        <div class="card-value" style="color:var(--amber)">8</div>
-        <div class="card-change" style="color:var(--muted)">3 críticos</div>
+    <div class="sidebar-bottom">
+      <button class="nav-btn" onclick="showPage('meusdados',this)" title="Meus Dados">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </button>
+
+      <button class="nav-btn" onclick="logout()" title="Sair">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+      </button>
+
+    </div>
+  </nav>
+
+  <main>
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title" id="page-title">Dashboard</span>
+        <span class="topbar-sub" id="page-sub">Visão geral da carteira</span>
       </div>
-      <div class="card">
-        <div class="card-label">Último disparo</div>
-        <div class="card-value" style="font-size:20px">PETR4</div>
-        <div class="card-change up">há 4 minutos</div>
+      <div class="topbar-right">
+        <span class="badge-green">● Mercado aberto</span>
+        <div class="avatar">CA</div>
       </div>
     </div>
 
-    <p class="section-title">Feed de alertas em tempo real</p>
-    <div class="alert-list">
-      <div class="alert-item">
-        <div class="alert-icon alert-up">📈</div>
-        <div class="dot dot-green"></div>
-        <div class="alert-info">
-          <div class="alert-title">PETR4 — Rompeu resistência de R$ 38,00</div>
-          <div class="alert-desc">Preço atual: R$ 38,42 · Volume acima da média em 34%</div>
-        </div>
-        <div class="alert-time">14:52</div>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon alert-down">📉</div>
-        <div class="dot dot-red"></div>
-        <div class="alert-info">
-          <div class="alert-title">INFY — Queda de 0,48% na abertura</div>
-          <div class="alert-desc">Stop-loss atingido · Preço: ₹ 1.420 · Limite: ₹ 1.430</div>
-        </div>
-        <div class="alert-time">14:48</div>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon alert-neutral">⚠️</div>
-        <div class="dot dot-amber"></div>
-        <div class="alert-info">
-          <div class="alert-title">AAPL — Próximo da meta de lucro</div>
-          <div class="alert-desc">Meta: $ 190,00 · Preço: $ 189,30 · Distância: 0,37%</div>
-        </div>
-        <div class="alert-time">14:31</div>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon alert-up">🔔</div>
-        <div class="dot dot-green"></div>
-        <div class="alert-info">
-          <div class="alert-title">SAP — Alta de 2,1% após resultado trimestral</div>
-          <div class="alert-desc">Lucro por ação acima do esperado · Recomendação: Comprar</div>
-        </div>
-        <div class="alert-time">13:59</div>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon alert-neutral">📰</div>
-        <div class="dot dot-amber"></div>
-        <div class="alert-info">
-          <div class="alert-title">Mercado BR — SELIC mantida em 10,5%</div>
-          <div class="alert-desc">Decisão do COPOM publicada · Impacto esperado na renda fixa</div>
-        </div>
-        <div class="alert-time">13:00</div>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon alert-down">🛑</div>
-        <div class="dot dot-red"></div>
-        <div class="alert-info">
-          <div class="alert-title">VALE3 — Alerta de volatilidade alta</div>
-          <div class="alert-desc">Variação intraday: −3,2% · Acompanhar antes de operar</div>
-        </div>
-        <div class="alert-time">11:20</div>
-      </div>
-    </div>
-
-    <div style="margin-top:1.5rem">
-      <p class="section-title">Criar novo alerta</p>
-      <div class="card" style="max-width:500px">
-        <div class="form-group">
-          <label>Ativo</label>
-          <select><option>PETR4</option><option>VALE3</option><option>AAPL</option><option>INFY</option><option>SAP</option></select>
-        </div>
-        <div class="row-2">
-          <div class="form-group">
-            <label>Tipo de alerta</label>
-            <select><option>Preço acima de</option><option>Preço abaixo de</option><option>Variação %</option></select>
-          </div>
-          <div class="form-group">
-            <label>Valor de gatilho</label>
-            <input type="number" placeholder="Ex: 40,00">
-          </div>
-        </div>
-        <button class="btn-pay" style="background:var(--amber);color:#000" onclick="alertCreated()">Criar Alerta</button>
-        <div id="alert-confirm" style="display:none;margin-top:0.75rem;text-align:center;font-size:13px;color:var(--green)">✔ Alerta criado com sucesso!</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════ NEGOCIAÇÕES ══════════ -->
-  <div class="page" id="page-negociacoes">
-    <div class="grid-4" style="margin-bottom:1.5rem">
-      <div class="card"><div class="card-label">Total operado</div><div class="card-value">R$ 28.450</div></div>
-      <div class="card"><div class="card-label">Compras</div><div class="card-value" style="color:var(--green)">R$ 15.200</div></div>
-      <div class="card"><div class="card-label">Vendas</div><div class="card-value" style="color:var(--red)">R$ 13.250</div></div>
-      <div class="card"><div class="card-label">Resultado líquido</div><div class="card-value" style="color:var(--green)">+R$ 1.950</div></div>
-    </div>
-
-    <div class="table-wrap">
-      <div class="table-head"><h3>Histórico de negociações</h3></div>
-      <table class="neg-table">
-        <thead><tr>
-          <th>Data</th><th>Ativo</th><th>Tipo</th><th>Qtd</th><th>Preço unit.</th><th>Total</th><th>Resultado</th>
-        </tr></thead>
-        <tbody id="neg-tbody">
-          <tr><td>13/05/2026</td><td>PETR4</td><td><span class="tag tag-green">Compra</span></td><td>100</td><td style="font-family:var(--mono)">R$ 36,90</td><td style="font-family:var(--mono)">R$ 3.690</td><td class="up">+R$ 152</td></tr>
-          <tr><td>12/05/2026</td><td>AAPL</td><td><span class="tag tag-red">Venda</span></td><td>5</td><td style="font-family:var(--mono)">$ 191,00</td><td style="font-family:var(--mono)">$ 955</td><td class="up">+$ 85</td></tr>
-          <tr><td>10/05/2026</td><td>SAP</td><td><span class="tag tag-green">Compra</span></td><td>20</td><td style="font-family:var(--mono)">€ 169,00</td><td style="font-family:var(--mono)">€ 3.380</td><td class="up">+€ 70</td></tr>
-          <tr><td>08/05/2026</td><td>INFY</td><td><span class="tag tag-red">Venda</span></td><td>30</td><td style="font-family:var(--mono)">₹ 1.445</td><td style="font-family:var(--mono)">₹ 43.350</td><td class="down">−₹ 450</td></tr>
-          <tr><td>05/05/2026</td><td>VALE3</td><td><span class="tag tag-red">Venda</span></td><td>50</td><td style="font-family:var(--mono)">R$ 68,10</td><td style="font-family:var(--mono)">R$ 3.405</td><td class="up">+R$ 205</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ══════════ PAGAMENTO ══════════ -->
-  <div class="page" id="page-pagamento">
-    <div class="pay-grid">
-      <div>
-        <p class="section-title">Ordem de operação</p>
+    <!-- ══════════ DASHBOARD ══════════ -->
+    <div class="page active" id="page-dashboard">
+      <div class="grid-4">
         <div class="card">
+          <div class="card-label">Patrimônio Total</div>
+          <div class="card-value">R$ 42.830</div>
+          <div class="card-change up">▲ +2,4% hoje</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Lucro do Mês</div>
+          <div class="card-value">R$ 1.204</div>
+          <div class="card-change up">▲ +2,89%</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Posições Abertas</div>
+          <div class="card-value">6</div>
+          <div class="card-change" style="color:var(--muted)">4 países</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Cashback Acum.</div>
+          <div class="card-value">R$ 218</div>
+          <div class="card-change up">▲ +R$ 12 hoje</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Ações em carteira</h3>
+          <span style="font-size:12px;color:var(--muted)">Atualizado agora</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>País</th>
+              <th>Ação</th>
+              <th>Variação</th>
+              <th>Preço</th>
+              <th>Qtd</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="flag" style="background:#009c3b">🇧🇷</span>Brasil</td>
+              <td><b>PETR4</b></td>
+              <td class="up">+1,59%</td>
+              <td class="mono" style="font-family:var(--mono)">R$ 38,42</td>
+              <td>100</td>
+              <td class="mono" style="font-family:var(--mono)">R$ 3.842</td>
+              <td><span class="tag tag-green">Queimados</span></td>
+              <td><button class="btn-sm btn-sell" onclick="openSell('PETR4','R$ 38,42')">Vender</button></td>
+            </tr>
+            <tr>
+              <td><span class="flag" style="background:#ff9933">🇮🇳</span>Índia</td>
+              <td><b>INFY</b></td>
+              <td class="down">−0,48%</td>
+              <td style="font-family:var(--mono)">₹ 1.420</td>
+              <td>50</td>
+              <td style="font-family:var(--mono)">₹ 71.000</td>
+              <td><span class="tag tag-red">Poluição</span></td>
+              <td><button class="btn-sm btn-buy" onclick="openBuy('INFY','₹ 1.420')">Comprar</button></td>
+            </tr>
+            <tr>
+              <td>🇺🇸 EUA</td>
+              <td><b>AAPL</b></td>
+              <td class="up">+0,92%</td>
+              <td style="font-family:var(--mono)">$ 189,30</td>
+              <td>10</td>
+              <td style="font-family:var(--mono)">$ 1.893</td>
+              <td><span class="tag tag-blue">Estável</span></td>
+              <td><button class="btn-sm btn-sell" onclick="openSell('AAPL','$ 189,30')">Vender</button></td>
+            </tr>
+            <tr>
+              <td>🇩🇪 Alemanha</td>
+              <td><b>SAP</b></td>
+              <td class="up">+2,10%</td>
+              <td style="font-family:var(--mono)">€ 172,50</td>
+              <td>20</td>
+              <td style="font-family:var(--mono)">€ 3.450</td>
+              <td><span class="tag tag-green">Alta</span></td>
+              <td><button class="btn-sm btn-buy" onclick="openBuy('SAP','€ 172,50')">Comprar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════ ALERTAS ══════════ -->
+    <div class="page" id="page-alertas">
+      <div class="grid-2" style="margin-bottom:1.5rem">
+        <div class="card">
+          <div class="card-label">Alertas Ativos</div>
+          <div class="card-value" style="color:var(--amber)">8</div>
+          <div class="card-change" style="color:var(--muted)">3 críticos</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Último disparo</div>
+          <div class="card-value" style="font-size:20px">PETR4</div>
+          <div class="card-change up">há 4 minutos</div>
+        </div>
+      </div>
+
+      <p class="section-title">Feed de alertas em tempo real</p>
+      <div class="alert-list">
+        <div class="alert-item">
+          <div class="alert-icon alert-up">📈</div>
+          <div class="dot dot-green"></div>
+          <div class="alert-info">
+            <div class="alert-title">PETR4 — Rompeu resistência de R$ 38,00</div>
+            <div class="alert-desc">Preço atual: R$ 38,42 · Volume acima da média em 34%</div>
+          </div>
+          <div class="alert-time">14:52</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon alert-down">📉</div>
+          <div class="dot dot-red"></div>
+          <div class="alert-info">
+            <div class="alert-title">INFY — Queda de 0,48% na abertura</div>
+            <div class="alert-desc">Stop-loss atingido · Preço: ₹ 1.420 · Limite: ₹ 1.430</div>
+          </div>
+          <div class="alert-time">14:48</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon alert-neutral">⚠️</div>
+          <div class="dot dot-amber"></div>
+          <div class="alert-info">
+            <div class="alert-title">AAPL — Próximo da meta de lucro</div>
+            <div class="alert-desc">Meta: $ 190,00 · Preço: $ 189,30 · Distância: 0,37%</div>
+          </div>
+          <div class="alert-time">14:31</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon alert-up">🔔</div>
+          <div class="dot dot-green"></div>
+          <div class="alert-info">
+            <div class="alert-title">SAP — Alta de 2,1% após resultado trimestral</div>
+            <div class="alert-desc">Lucro por ação acima do esperado · Recomendação: Comprar</div>
+          </div>
+          <div class="alert-time">13:59</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon alert-neutral">📰</div>
+          <div class="dot dot-amber"></div>
+          <div class="alert-info">
+            <div class="alert-title">Mercado BR — SELIC mantida em 10,5%</div>
+            <div class="alert-desc">Decisão do COPOM publicada · Impacto esperado na renda fixa</div>
+          </div>
+          <div class="alert-time">13:00</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-icon alert-down">🛑</div>
+          <div class="dot dot-red"></div>
+          <div class="alert-info">
+            <div class="alert-title">VALE3 — Alerta de volatilidade alta</div>
+            <div class="alert-desc">Variação intraday: −3,2% · Acompanhar antes de operar</div>
+          </div>
+          <div class="alert-time">11:20</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem">
+        <p class="section-title">Criar novo alerta</p>
+        <div class="card" style="max-width:500px">
           <div class="form-group">
             <label>Ativo</label>
-            <select id="pay-ativo" onchange="updateOrder()">
-              <option value="PETR4|R$|38.42">PETR4 — R$ 38,42</option>
-              <option value="AAPL|$|189.30">AAPL — $ 189,30</option>
-              <option value="INFY|₹|1420">INFY — ₹ 1.420</option>
-              <option value="SAP|€|172.50">SAP — € 172,50</option>
+            <select>
+              <option>PETR4</option>
+              <option>VALE3</option>
+              <option>AAPL</option>
+              <option>INFY</option>
+              <option>SAP</option>
             </select>
           </div>
           <div class="row-2">
             <div class="form-group">
-              <label>Tipo</label>
-              <select id="pay-tipo" onchange="updateOrder()"><option>Compra</option><option>Venda</option></select>
+              <label>Tipo de alerta</label>
+              <select>
+                <option>Preço acima de</option>
+                <option>Preço abaixo de</option>
+                <option>Variação %</option>
+              </select>
             </div>
             <div class="form-group">
-              <label>Quantidade</label>
-              <input type="number" id="pay-qtd" value="10" min="1" oninput="updateOrder()">
+              <label>Valor de gatilho</label>
+              <input type="number" placeholder="Ex: 40,00">
             </div>
           </div>
-
-          <p class="section-title" style="margin-top:0.5rem;font-size:13px">Dados de pagamento</p>
-          <div class="form-group">
-            <label>Nome no cartão</label>
-            <input type="text" placeholder="Carolina Idehama" id="pay-nome">
-          </div>
-          <div class="form-group">
-            <label>Número do cartão</label>
-            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" id="pay-card" oninput="fmtCard(this)">
-          </div>
-          <div class="row-2">
-            <div class="form-group">
-              <label>Validade</label>
-              <input type="text" placeholder="MM/AA" maxlength="5" id="pay-val" oninput="fmtDate(this)">
-            </div>
-            <div class="form-group">
-              <label>CVV</label>
-              <input type="text" placeholder="•••" maxlength="3">
-            </div>
-          </div>
-          <button class="btn-pay" onclick="processPay()">Confirmar operação</button>
+          <button class="btn-pay" style="background:var(--amber);color:#000" onclick="alertCreated()">Criar
+            Alerta</button>
+          <div id="alert-confirm"
+            style="display:none;margin-top:0.75rem;text-align:center;font-size:13px;color:var(--green)">✔ Alerta criado
+            com sucesso!</div>
         </div>
       </div>
+    </div>
 
-      <div>
-        <p class="section-title">Resumo da ordem</p>
+    <!-- ══════════ NEGOCIAÇÕES ══════════ -->
+    <div class="page" id="page-negociacoes">
+      <div class="grid-4" style="margin-bottom:1.5rem">
         <div class="card">
-          <div class="order-summary">
-            <div class="order-row"><span>Ativo</span><span id="ord-ativo">PETR4</span></div>
-            <div class="order-row"><span>Tipo</span><span id="ord-tipo">Compra</span></div>
-            <div class="order-row"><span>Quantidade</span><span id="ord-qtd">10</span></div>
-            <div class="order-row"><span>Preço unit.</span><span id="ord-preco">R$ 38,42</span></div>
-            <div class="order-divider"></div>
-            <div class="order-row"><span>Taxa corretagem</span><span>R$ 2,50</span></div>
-            <div class="order-row"><span>Cashback (0,5%)</span><span id="ord-cash" style="color:var(--green)">R$ 1,92</span></div>
-            <div class="order-divider"></div>
-            <div class="order-total"><span>Total</span><span id="ord-total">R$ 386,70</span></div>
+          <div class="card-label">Total operado</div>
+          <div class="card-value">R$ 28.450</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Compras</div>
+          <div class="card-value" style="color:var(--green)">R$ 15.200</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Vendas</div>
+          <div class="card-value" style="color:var(--red)">R$ 13.250</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Resultado líquido</div>
+          <div class="card-value" style="color:var(--green)">+R$ 1.950</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Histórico de negociações</h3>
+        </div>
+        <table class="neg-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Ativo</th>
+              <th>Tipo</th>
+              <th>Qtd</th>
+              <th>Preço unit.</th>
+              <th>Total</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody id="neg-tbody">
+            <tr>
+              <td>13/05/2026</td>
+              <td>PETR4</td>
+              <td><span class="tag tag-green">Compra</span></td>
+              <td>100</td>
+              <td style="font-family:var(--mono)">R$ 36,90</td>
+              <td style="font-family:var(--mono)">R$ 3.690</td>
+              <td class="up">+R$ 152</td>
+            </tr>
+            <tr>
+              <td>12/05/2026</td>
+              <td>AAPL</td>
+              <td><span class="tag tag-red">Venda</span></td>
+              <td>5</td>
+              <td style="font-family:var(--mono)">$ 191,00</td>
+              <td style="font-family:var(--mono)">$ 955</td>
+              <td class="up">+$ 85</td>
+            </tr>
+            <tr>
+              <td>10/05/2026</td>
+              <td>SAP</td>
+              <td><span class="tag tag-green">Compra</span></td>
+              <td>20</td>
+              <td style="font-family:var(--mono)">€ 169,00</td>
+              <td style="font-family:var(--mono)">€ 3.380</td>
+              <td class="up">+€ 70</td>
+            </tr>
+            <tr>
+              <td>08/05/2026</td>
+              <td>INFY</td>
+              <td><span class="tag tag-red">Venda</span></td>
+              <td>30</td>
+              <td style="font-family:var(--mono)">₹ 1.445</td>
+              <td style="font-family:var(--mono)">₹ 43.350</td>
+              <td class="down">−₹ 450</td>
+            </tr>
+            <tr>
+              <td>05/05/2026</td>
+              <td>VALE3</td>
+              <td><span class="tag tag-red">Venda</span></td>
+              <td>50</td>
+              <td style="font-family:var(--mono)">R$ 68,10</td>
+              <td style="font-family:var(--mono)">R$ 3.405</td>
+              <td class="up">+R$ 205</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════ PAGAMENTO ══════════ -->
+    <div class="page" id="page-pagamento">
+      <div class="pay-grid">
+        <div>
+          <p class="section-title">Ordem de operação</p>
+          <div class="card">
+            <div class="form-group">
+              <label>Ativo</label>
+              <select id="pay-ativo" onchange="updateOrder()">
+                <option value="PETR4|R$|38.42">PETR4 — R$ 38,42</option>
+                <option value="AAPL|$|189.30">AAPL — $ 189,30</option>
+                <option value="INFY|₹|1420">INFY — ₹ 1.420</option>
+                <option value="SAP|€|172.50">SAP — € 172,50</option>
+              </select>
+            </div>
+            <div class="row-2">
+              <div class="form-group">
+                <label>Tipo</label>
+                <select id="pay-tipo" onchange="updateOrder()">
+                  <option>Compra</option>
+                  <option>Venda</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Quantidade</label>
+                <input type="number" id="pay-qtd" value="10" min="1" oninput="updateOrder()">
+              </div>
+            </div>
+
+            <p class="section-title" style="margin-top:0.5rem;font-size:13px">Dados de pagamento</p>
+            <div class="form-group">
+              <label>Nome no cartão</label>
+              <input type="text" placeholder="Carolina Idehama" id="pay-nome">
+            </div>
+            <div class="form-group">
+              <label>Número do cartão</label>
+              <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" id="pay-card" oninput="fmtCard(this)">
+            </div>
+            <div class="row-2">
+              <div class="form-group">
+                <label>Validade</label>
+                <input type="text" placeholder="MM/AA" maxlength="5" id="pay-val" oninput="fmtDate(this)">
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="•••" maxlength="3">
+              </div>
+            </div>
+            <button class="btn-pay" onclick="processPay()">Confirmar operação</button>
           </div>
         </div>
 
-        <div class="receipt-box" id="receipt">
-          <div class="receipt-icon">✅</div>
-          <div class="receipt-title">Operação confirmada!</div>
-          <div class="receipt-sub" id="receipt-msg">Compra de 10 PETR4 executada com sucesso.</div>
-          <div style="margin-top:0.75rem;font-size:12px;color:var(--muted);font-family:var(--mono)" id="receipt-id"></div>
+        <div>
+          <p class="section-title">Resumo da ordem</p>
+          <div class="card">
+            <div class="order-summary">
+              <div class="order-row"><span>Ativo</span><span id="ord-ativo">PETR4</span></div>
+              <div class="order-row"><span>Tipo</span><span id="ord-tipo">Compra</span></div>
+              <div class="order-row"><span>Quantidade</span><span id="ord-qtd">10</span></div>
+              <div class="order-row"><span>Preço unit.</span><span id="ord-preco">R$ 38,42</span></div>
+              <div class="order-divider"></div>
+              <div class="order-row"><span>Taxa corretagem</span><span>R$ 2,50</span></div>
+              <div class="order-row"><span>Cashback (0,5%)</span><span id="ord-cash" style="color:var(--green)">R$
+                  1,92</span></div>
+              <div class="order-divider"></div>
+              <div class="order-total"><span>Total</span><span id="ord-total">R$ 386,70</span></div>
+            </div>
+          </div>
+
+          <div class="receipt-box" id="receipt">
+            <div class="receipt-icon">✅</div>
+            <div class="receipt-title">Operação confirmada!</div>
+            <div class="receipt-sub" id="receipt-msg">Compra de 10 PETR4 executada com sucesso.</div>
+            <div style="margin-top:0.75rem;font-size:12px;color:var(--muted);font-family:var(--mono)" id="receipt-id">
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ══════════ MEUS DADOS ══════════ -->
+    <div class="page" id="page-meusdados">
+      <div class="grid-2">
+        <div>
+          <div class="data-card">
+            <h3>Dados pessoais</h3>
+            <div class="data-row"><span>Nome</span><span id="user-nome">-</span></div>
+            <div class="data-row"><span>E-mail</span><span id="user-email">-</span></div>
+            <div class="data-row"><span>Saldo</span><span id="user-saldo">R$ 0,00</span></div>
+            <div class="data-row"><span>Conta criada</span><span>—</span></div>
+          </div>
+          <div class="data-card">
+            <h3>Plano & Limites</h3>
+            <div class="data-row"><span>Plano</span><span><span class="tag tag-blue">Pro</span></span></div>
+            <div class="data-row"><span>Limite diário</span><span>R$ 50.000</span></div>
+            <div class="data-row"><span>Operações/mês</span><span>128 / ilimitado</span></div>
+            <div class="data-row"><span>Cashback</span><span>0,5% por operação</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="data-card">
+            <h3>Resumo financeiro</h3>
+            <div class="data-row"><span>Saldo disponível</span><span style="color:var(--green)">R$ 8.320,00</span></div>
+            <div class="data-row"><span>Em operações</span><span>R$ 34.510,00</span></div>
+            <div class="data-row"><span>Patrimônio total</span><span>R$ 42.830,00</span></div>
+            <div class="data-row"><span>Cashback total</span><span style="color:var(--green)">R$ 218,40</span></div>
+            <div class="data-row"><span>Lucro acumulado</span><span style="color:var(--green)">+R$ 5.230</span></div>
+          </div>
+          <div class="data-card">
+            <h3>Segurança</h3>
+            <div class="data-row"><span>Autenticação 2FA</span><span style="color:var(--green)">Ativo</span></div>
+            <div class="data-row"><span>Último acesso</span><span>Hoje, 14:31</span></div>
+            <div class="data-row"><span>Dispositivos</span><span>2 cadastrados</span></div>
+            <div class="data-row"><span>Senha</span><span>Atualizada há 30d</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL OPERAÇÃO -->
+  <div id="modal-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;align-items:center;justify-content:center">
+    <div
+      style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;width:360px;max-width:90vw">
+      <h3 id="modal-title" style="margin-bottom:1rem">Comprar PETR4</h3>
+      <div class="form-group"><label>Quantidade</label><input type="number" value="10" id="modal-qtd" min="1"
+          oninput="updateModal()"></div>
+      <div style="background:var(--surface2);border-radius:10px;padding:1rem;margin-bottom:1rem;font-size:13px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span
+            style="color:var(--muted)">Preço</span><span id="modal-price" style="font-family:var(--mono)"></span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Total
+            estimado</span><span id="modal-total" style="font-family:var(--mono);color:var(--green)"></span></div>
+      </div>
+      <div style="display:flex;gap:0.75rem">
+        <button onclick="closeModal()"
+          style="flex:1;height:42px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-family:var(--font);font-size:14px">Cancelar</button>
+        <button onclick="confirmModal()"
+          style="flex:1;height:42px;border-radius:10px;border:none;background:var(--blue);color:#fff;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:600">Confirmar</button>
       </div>
     </div>
   </div>
 
-  <!-- ══════════ MEUS DADOS ══════════ -->
-  <div class="page" id="page-meusdados">
-    <div class="grid-2">
-      <div>
-        <div class="data-card">
-          <h3>Dados pessoais</h3>
-          <div class="data-row"><span>Nome</span><span>Carolina Idehama</span></div>
-          <div class="data-row"><span>CPF</span><span>***.456.789-**</span></div>
-          <div class="data-row"><span>E-mail</span><span>carolina@capital.gmail.com</span></div>
-          <div class="data-row"><span>Telefone</span><span>+55 11 9****-8732</span></div>
-          <div class="data-row"><span>Conta criada</span><span>Jan 2025</span></div>
-        </div>
-        <div class="data-card">
-          <h3>Plano & Limites</h3>
-          <div class="data-row"><span>Plano</span><span><span class="tag tag-blue">Pro</span></span></div>
-          <div class="data-row"><span>Limite diário</span><span>R$ 50.000</span></div>
-          <div class="data-row"><span>Operações/mês</span><span>128 / ilimitado</span></div>
-          <div class="data-row"><span>Cashback</span><span>0,5% por operação</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="data-card">
-          <h3>Resumo financeiro</h3>
-          <div class="data-row"><span>Saldo disponível</span><span style="color:var(--green)">R$ 8.320,00</span></div>
-          <div class="data-row"><span>Em operações</span><span>R$ 34.510,00</span></div>
-          <div class="data-row"><span>Patrimônio total</span><span>R$ 42.830,00</span></div>
-          <div class="data-row"><span>Cashback total</span><span style="color:var(--green)">R$ 218,40</span></div>
-          <div class="data-row"><span>Lucro acumulado</span><span style="color:var(--green)">+R$ 5.230</span></div>
-        </div>
-        <div class="data-card">
-          <h3>Segurança</h3>
-          <div class="data-row"><span>Autenticação 2FA</span><span style="color:var(--green)">Ativo</span></div>
-          <div class="data-row"><span>Último acesso</span><span>Hoje, 14:31</span></div>
-          <div class="data-row"><span>Dispositivos</span><span>2 cadastrados</span></div>
-          <div class="data-row"><span>Senha</span><span>Atualizada há 30d</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<!-- MODAL OPERAÇÃO -->
-<div id="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;align-items:center;justify-content:center">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;width:360px;max-width:90vw">
-    <h3 id="modal-title" style="margin-bottom:1rem">Comprar PETR4</h3>
-    <div class="form-group"><label>Quantidade</label><input type="number" value="10" id="modal-qtd" min="1" oninput="updateModal()"></div>
-    <div style="background:var(--surface2);border-radius:10px;padding:1rem;margin-bottom:1rem;font-size:13px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="color:var(--muted)">Preço</span><span id="modal-price" style="font-family:var(--mono)"></span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Total estimado</span><span id="modal-total" style="font-family:var(--mono);color:var(--green)"></span></div>
-    </div>
-    <div style="display:flex;gap:0.75rem">
-      <button onclick="closeModal()" style="flex:1;height:42px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-family:var(--font);font-size:14px">Cancelar</button>
-      <button onclick="confirmModal()" style="flex:1;height:42px;border-radius:10px;border:none;background:var(--blue);color:#fff;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:600">Confirmar</button>
-    </div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
