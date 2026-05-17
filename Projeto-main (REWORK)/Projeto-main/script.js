@@ -43,6 +43,29 @@ function logout() {
   window.location.href = "login.html";
 }
 
+const mapaAtivos = {
+  PETR4: {
+    pais: "Brasil",
+    flag: "https://flagcdn.com/w40/br.png"
+  },
+  VALE3: {
+    pais: "Brasil",
+    flag: "https://flagcdn.com/w40/br.png"
+  },
+  AAPL: {
+    pais: "EUA",
+    flag: "https://flagcdn.com/w40/us.png"
+  },
+  INFY: {
+    pais: "Índia",
+    flag: "https://flagcdn.com/w40/in.png"
+  },
+  SAP: {
+    pais: "Alemanha",
+    flag: "https://flagcdn.com/w40/de.png"
+  }
+};
+
 // ===============================
 // 🔹 CONTROLE DE PÁGINA
 // ===============================
@@ -88,7 +111,8 @@ function Cadastro() {
     email,
     senha,
     saldo: 1000,
-    historico: []
+    historico: [],
+    carteira: {}
   };
 
   usuarios.push(novoUsuario);
@@ -99,13 +123,13 @@ function Cadastro() {
 }
 
 function Login() {
-  const emailEl = document.getElementById("login-email");
-  const senhaEl = document.getElementById("login-senha");
+  const email = document.getElementById("login-email").value;
+  const senha = document.getElementById("login-senha").value;
 
-  if (!emailEl || !senhaEl) return;
-
-  const email = emailEl.value;
-  const senha = senhaEl.value;
+  if (!email || !senha) {
+    alert("Preencha todos os campos");
+    return;
+  }
 
   let usuarios = getUsuarios();
 
@@ -130,11 +154,15 @@ function initDashboard() {
   const avatar = document.querySelector(".avatar");
 
   if (avatar && usuarioLogado) {
-    avatar.textContent = usuarioLogado.email[0].toUpperCase();
+    avatar.textContent = usuarioLogado.nome
+      ? usuarioLogado.nome[0].toUpperCase()
+      : usuarioLogado.email[0].toUpperCase();
   }
 
   updateOrderSafe();
 }
+
+
 
 // ===============================
 // 🔹 UPDATE ORDER (SAFE)
@@ -168,6 +196,13 @@ function updateOrderSafe() {
     cur + ' ' + (total + 2.5).toFixed(2);
 }
 
+const mercado = {
+  PETR4: { preco: 38.42, anterior: 38.42 },
+  AAPL: { preco: 189.30, anterior: 189.30 },
+  INFY: { preco: 1420, anterior: 1420 },
+  SAP: { preco: 172.50, anterior: 172.50 }
+};
+
 // ===============================
 // 🔹 ATUALIZAR USUÁRIO
 // ===============================
@@ -183,6 +218,272 @@ function atualizarUsuario(dadosAtualizados) {
   setUsuarioLogado(dadosAtualizados);
 }
 
+function calcularCashback(user) {
+  if (!user.historico) return 0;
+
+  let total = 0;
+
+  user.historico.forEach(op => {
+    total += op.total * 0.005; // 0.5%
+  });
+
+  return total;
+}
+
+function atualizarCashbackUI() {
+  const user = getUsuarioLogado();
+  if (!user) return;
+
+  const el = document.getElementById("cashback-total");
+  if (!el) return;
+
+  const cashback = calcularCashback(user);
+
+  el.textContent = "R$ " + cashback.toFixed(2);
+}
+
+function calcularDashboard(user) {
+  if (!user || !user.historico) {
+    return {
+      patrimonio: user?.saldo || 0,
+      lucro: 0,
+      posicoes: 0
+    };
+  }
+
+  let totalOperado = 0;
+  let posicoes = 0;
+
+  user.historico.forEach(op => {
+    totalOperado += op.total;
+
+    if (op.tipo === "Compra") posicoes++;
+  });
+
+  return {
+    patrimonio: user.saldo,
+    lucro: totalOperado * 0.02, // simulação simples (2%)
+    posicoes
+  };
+}
+
+
+function gerarVariacao() {
+  return (Math.random() * 4 - 2); // entre -2% e +2%
+}
+
+function atualizarVariacoesTabela() {
+  const linhas = document.querySelectorAll("table tbody tr");
+
+  linhas.forEach(linha => {
+    const variacaoEl = linha.children[2]; // coluna de variação
+
+    const variacao = gerarVariacao();
+
+    variacaoEl.textContent =
+      (variacao > 0 ? "+" : "") + variacao.toFixed(2) + "%";
+
+    variacaoEl.classList.remove("up", "down");
+
+    if (variacao > 0) {
+      variacaoEl.classList.add("up");
+    } else {
+      variacaoEl.classList.add("down");
+    }
+  });
+}
+
+function atualizarMercado() {
+  Object.keys(mercado).forEach(ativo => {
+    const variacao = (Math.random() * 2 - 1); // -1% a +1%
+
+    mercado[ativo].anterior = mercado[ativo].preco;
+    mercado[ativo].preco *= (1 + variacao / 100);
+  });
+}
+
+function calcularVariacao(ativo) {
+  const atual = mercado[ativo].preco;
+  const anterior = mercado[ativo].anterior;
+
+  return ((atual - anterior) / anterior) * 100;
+}
+
+function atualizarTabelaMercado() {
+  const linhas = document.querySelectorAll("#page-dashboard table tbody tr");
+
+  linhas.forEach(linha => {
+    const ativo = linha.children[1].innerText.trim();
+
+    if (!mercado[ativo]) return;
+
+    const paisEl = linha.children[0];
+    const variacaoEl = linha.children[2];
+    const precoEl = linha.children[3];
+
+    const preco = mercado[ativo].preco;
+    const variacao = calcularVariacao(ativo);
+
+
+    precoEl.textContent = "R$ " + preco.toFixed(2);
+
+
+    variacaoEl.textContent =
+      (variacao > 0 ? "+" : "") + variacao.toFixed(2) + "%";
+
+    variacaoEl.classList.remove("up", "down");
+    variacaoEl.classList.add(variacao >= 0 ? "up" : "down");
+
+
+    const info = mapaAtivos[ativo];
+
+    if (info && paisEl) {
+      paisEl.innerHTML = `
+        <img src="${info.flag}" class="flag-img">
+        ${info.pais}
+      `;
+    }
+  });
+}
+
+function calcularPatrimonio(user) {
+  let total = user.saldo;
+
+  if (!user.carteira) return total;
+
+  Object.keys(user.carteira).forEach(ativo => {
+    const qtd = user.carteira[ativo];
+    const preco = mercado[ativo]?.preco || 0;
+
+    total += qtd * preco;
+  });
+
+  return total;
+}
+
+function atualizarDashboardUI() {
+  const user = getUsuarioLogado();
+  if (!user) return;
+
+  const patrimonioEl = document.getElementById("patrimonio-total");
+
+  const patrimonio = calcularPatrimonio(user);
+
+  if (patrimonioEl)
+    patrimonioEl.textContent = "R$ " + patrimonio.toFixed(2);
+}
+
+function calcularStats(user) {
+  if (!user?.historico) {
+    return {
+      totalOperado: 0,
+      compras: 0,
+      vendas: 0,
+      resultado: 0,
+      lucroMes: 0
+    };
+  }
+
+  let totalOperado = 0;
+  let compras = 0;
+  let vendas = 0;
+
+  const hoje = new Date();
+  const mesAtual = hoje.getMonth();
+  const anoAtual = hoje.getFullYear();
+
+  let lucroMes = 0;
+
+  user.historico.forEach(op => {
+    totalOperado += op.total;
+
+    if (op.tipo === "Compra") compras += op.total;
+    if (op.tipo === "Venda") vendas += op.total;
+
+    const data = new Date(op.data.split("/").reverse().join("-"));
+
+    if (data.getMonth() === mesAtual && data.getFullYear() === anoAtual) {
+      lucroMes += op.tipo === "Venda" ? op.total : -op.total;
+    }
+  });
+
+  return {
+    totalOperado,
+    compras,
+    vendas,
+    resultado: vendas - compras,
+    lucroMes
+  };
+}
+
+function atualizarNegociacoesUI() {
+  const user = getUsuarioLogado();
+  if (!user) return;
+
+  const stats = calcularStats(user);
+
+  const page = document.querySelector("#page-negociacoes");
+  if (!page) return;
+
+  const cards = page.querySelectorAll(".grid-4 .card-value");
+
+  if (cards.length >= 4) {
+    cards[0].textContent = "R$ " + stats.totalOperado.toFixed(2);
+    cards[1].textContent = "R$ " + stats.compras.toFixed(2);
+    cards[2].textContent = "R$ " + stats.vendas.toFixed(2);
+
+    const res = cards[3];
+    res.textContent = (stats.resultado >= 0 ? "+R$ " : "-R$ ") +
+      Math.abs(stats.resultado).toFixed(2);
+
+    res.style.color = stats.resultado >= 0 ? "var(--green)" : "var(--red)";
+  }
+}
+
+function atualizarLucroMes() {
+  const user = getUsuarioLogado();
+  if (!user) return;
+
+  const stats = calcularStats(user);
+
+  const el = document.getElementById("lucro-mes");
+  if (!el) return;
+
+  el.textContent =
+    (stats.lucroMes >= 0 ? "+R$ " : "-R$ ") +
+    Math.abs(stats.lucroMes).toFixed(2);
+
+  el.style.color = stats.lucroMes >= 0 ? "var(--green)" : "var(--red)";
+}
+
+function gerarAlertaRealtime() {
+  const ativos = Object.keys(mercado);
+  const ativo = ativos[Math.floor(Math.random() * ativos.length)];
+
+  const variacao = (Math.random() * 2 - 1).toFixed(2);
+
+  const list = document.querySelector(".alert-list");
+  if (!list) return;
+
+  const div = document.createElement("div");
+  div.className = "alert-item";
+
+  div.innerHTML = `
+    <div class="alert-icon alert-neutral">⚡</div>
+    <div class="dot ${variacao >= 0 ? 'dot-green' : 'dot-red'}"></div>
+    <div class="alert-info">
+      <div class="alert-title">${ativo} — variação de ${variacao}%</div>
+      <div class="alert-desc">Atualização automática do mercado em tempo real</div>
+    </div>
+    <div class="alert-time">${new Date().toLocaleTimeString()}</div>
+  `;
+
+  list.prepend(div);
+
+  if (list.children.length > 8) {
+    list.removeChild(list.lastChild);
+  }
+}
 // ===============================
 // 🔹 INICIALIZAÇÃO
 // ===============================
@@ -190,7 +491,24 @@ function atualizarUsuario(dadosAtualizados) {
 document.addEventListener("DOMContentLoaded", () => {
   initDashboard();
   carregarDadosUsuario();
-});
+  atualizarImpactoUI();
+  atualizarCashbackUI();
+  atualizarDashboardUI();
+  atualizarVariacoesTabela();
+  atualizarTabelaMercado();
+  atualizarNegociacoesUI();
+  atualizarLucroMes();
+
+  setInterval(() => {
+    atualizarMercado();
+    atualizarTabelaMercado();
+    atualizarDashboardUI();
+    atualizarNegociacoesUI();
+    atualizarLucroMes();
+  }, 3000);
+}, 3000);
+setInterval(atualizarVariacoesTabela, 5000);
+
 
 // ===============================
 // 🔹 NAVEGAÇÃO ENTRE PÁGINAS
@@ -284,6 +602,7 @@ function updateModal() {
   document.getElementById("modal-total").textContent = "R$ " + total.toFixed(2);
 }
 
+const ativo = (modalAtivo || "").toString().trim().toUpperCase();
 function confirmModal() {
   let user = getUsuarioLogado();
   const qtd = parseInt(document.getElementById("modal-qtd").value) || 1;
@@ -299,12 +618,22 @@ function confirmModal() {
     user.saldo += total;
   }
 
-  salvarHistorico(user, modalAtivo, modalTipo, qtd, modalPreco, total);
+  if (!user.carteira) user.carteira = {};
+
+  const ativo = modalAtivo.trim().toUpperCase();
+  const atual = Number(user.carteira[ativo]) || 0;
+
+
+
+  salvarHistorico(user, ativo, modalTipo, qtd, modalPreco, total);
   atualizarUsuario(user);
 
   atualizarSaldoUI();
   atualizarImpactoUI();
+  atualizarCashbackUI();
   renderHistorico();
+  atualizarDashboardUI();
+
 
   closeModal();
   alert(`${modalTipo} realizada com sucesso!`);
@@ -318,9 +647,9 @@ function salvarHistorico(user, ativo, tipo, qtd, preco, total) {
     data: new Date().toLocaleDateString(),
     ativo,
     tipo,
-    qtd,
-    preco,
-    total
+    qtd: Number(qtd),
+    preco: Number(preco),
+    total: Number(total)
   };
 
   user.historico.unshift(operacao);
@@ -410,8 +739,12 @@ function atualizarImpactoUI() {
   let impacto = 0;
 
   user.historico.forEach(op => {
-    impacto += op.total * 0.001; // exemplo simples
+    impacto += op.total * 0.001;
   });
 
-  console.log("Impacto ambiental:", impacto);
+  const el = document.getElementById("impacto-total");
+  if (el) {
+    el.textContent = impacto.toFixed(2) + " kg CO₂";
+  }
 }
+

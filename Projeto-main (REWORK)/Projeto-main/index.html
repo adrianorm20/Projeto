@@ -84,13 +84,12 @@
       <div class="grid-4">
         <div class="card">
           <div class="card-label">Patrimônio Total</div>
-          <div class="card-value">R$ 42.830</div>
-          <div class="card-change up">▲ +2,4% hoje</div>
+          <div class="card-value" id="patrimonio-total">R$ 0,00</div>
+
         </div>
         <div class="card">
           <div class="card-label">Lucro do Mês</div>
-          <div class="card-value">R$ 1.204</div>
-          <div class="card-change up">▲ +2,89%</div>
+          <div class="card-value" id="lucro-mes">R$ 0,00</div>
         </div>
         <div class="card">
           <div class="card-label">Posições Abertas</div>
@@ -98,9 +97,30 @@
           <div class="card-change" style="color:var(--muted)">4 países</div>
         </div>
         <div class="card">
-          <div class="card-label">Cashback Acum.</div>
-          <div class="card-value">R$ 218</div>
-          <div class="card-change up">▲ +R$ 12 hoje</div>
+          <div class="card-label">
+            Cashback Acum.
+            <span class="tooltip">
+              ℹ️
+              <span class="tooltip-text">
+                Parte do valor de cada operação é devolvida ao usuário como benefício financeiro (0,5% por transação).
+              </span>
+            </span>
+          </div>
+          <div class="card-value" id="cashback-total">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="card-label">
+            Impacto Ambiental
+            <span class="tooltip">
+              ℹ️
+              <span class="tooltip-text">
+                Cada operação gera impacto ambiental proporcional ao valor investido.
+              </span>
+            </span>
+          </div>
+
+          <div class="card-value" id="impacto-total">0</div>
+          <div class="card-change">CO₂ estimado acumulado</div>
         </div>
       </div>
 
@@ -124,7 +144,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><span class="flag" style="background:#009c3b">🇧🇷</span>Brasil</td>
+              <td class="td-pais"></td>
               <td><b>PETR4</b></td>
               <td class="up">+1,59%</td>
               <td class="mono" style="font-family:var(--mono)">R$ 38,42</td>
@@ -134,7 +154,7 @@
               <td><button class="btn-sm btn-sell" onclick="openSell('PETR4','R$ 38,42')">Vender</button></td>
             </tr>
             <tr>
-              <td><span class="flag" style="background:#ff9933">🇮🇳</span>Índia</td>
+              <td class="td-pais"></td>
               <td><b>INFY</b></td>
               <td class="down">−0,48%</td>
               <td style="font-family:var(--mono)">₹ 1.420</td>
@@ -144,7 +164,7 @@
               <td><button class="btn-sm btn-buy" onclick="openBuy('INFY','₹ 1.420')">Comprar</button></td>
             </tr>
             <tr>
-              <td>🇺🇸 EUA</td>
+              <td class="td-pais"></td>
               <td><b>AAPL</b></td>
               <td class="up">+0,92%</td>
               <td style="font-family:var(--mono)">$ 189,30</td>
@@ -154,7 +174,7 @@
               <td><button class="btn-sm btn-sell" onclick="openSell('AAPL','$ 189,30')">Vender</button></td>
             </tr>
             <tr>
-              <td>🇩🇪 Alemanha</td>
+              <td class="td-pais"></td>
               <td><b>SAP</b></td>
               <td class="up">+2,10%</td>
               <td style="font-family:var(--mono)">€ 172,50</td>
