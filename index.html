@@ -1,34 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
-
 <body>
+    <input id="nome">
+<button onclick="mostrar()">Enviar</button>
+<p id="saida"></p>
 
-    
-        <header>
-            <nav id="top-header">
-                <p id="dashboard">Dashboard</p>
-                <p id="investimento">Investimento</p>
-                <p id="alerta">Alerta de Investimento</p>
-                <p id="historico">Historico</p>
-            </nav>
-        </header>
- 
-    
-        <a href="login.html">Login</a>
-        <a href="cadastro.html">Cadastro</a>
-    
-
-    <main>
-
-    </main>
-    <script src="script.js"></script>
+<script>
+function mostrar() {
+  let nome = document.getElementById("nome").value;
+  document.getElementById("saida").innerHTML = nome;
+}
+</script>
 </body>
-
 </html>

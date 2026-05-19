@@ -33,6 +33,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .sidebar-bottom{margin-top:auto}
 
+@media (max-width: 768px){
+  .sidebar-bottom{
+    margin-top: 0;      
+    margin-left: auto;   
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px){
+  .sidebar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10px;
+  }
+}
+
 /* ── MAIN ── */
 main{margin-left:64px;min-height:100vh}
 
@@ -64,7 +82,7 @@ main{margin-left:64px;min-height:100vh}
 .up{color:var(--green)}.down{color:var(--red)}
 
 /* ── TABLE ── */
-.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1.5rem;overflow-x:auto;}
 .table-head{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .table-head h3{font-size:14px;font-weight:600}
 table{width:100%;border-collapse:collapse}
@@ -465,4 +483,44 @@ tr:hover td{background:var(--surface2)}
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+@media (max-width: 1024px){
+  .grid-4{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 600px){
+  .grid-4{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px){
+  .sidebar{
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    bottom: 0;
+    top: auto;
+  }
+
+  main{
+    margin-left: 0;
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 768px){
+  th, td{
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px; 
 }
